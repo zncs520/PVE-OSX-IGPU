@@ -3,7 +3,7 @@
 ############### 型号       软测功耗     满负载最高温度
 RTX3050 <金属大师迷你>        135W        67℃
 RX460 <景讯XFX无风扇静音版>     50W        63℃
-GT640 <戴尔GT640>             ??         100℃
+UHD630 <IGPU>             ??        
 
 `` 一 BIOS 主要关注几个点：``
 
@@ -16,39 +16,36 @@ GT640 <戴尔GT640>             ??         100℃
 
 
 
-`` 二 开启 IOMMU ``
+`` 二 上传配置文件 ``
 
-# 1.修改grub参数
-GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt pcie_acs_override=downstream,multifunction nofb textonly nomodeset video=efifb:off"
-
-或者:
-GRUB_CMDLINE_LINUX_DEFAULT="intel_iommu=on i915.enable_gvt=1 pcie_acs_override=downstream"
-
-
-
-# 2.上传配置文件
-
-# 3.更新内核
-update-grub
-# 4.更新内核参数
-update-initramfs -k all -u
-
-
-`` 三 硬盘直通 ``
-
-## 1.下面命令，列出当前的硬盘列表
-ls -la /dev/disk/by-id/|grep -v dm|grep -v lvm|grep -v part
-
-## 2.直通intel的一个nvme硬盘，那么你可以使用下面命令
-qm set 101 --scsi1 /dev/disk/by-id/nvme-INTEL_SSDPE2KX020T8_BTLJ039307142P0BGN
-执行之后，你可以在面板中看到下面这个硬盘。
-|| qm set <vmid> --scsiX /dev/disk/by-id/xxxxxxx ||
+./ddsinstall.sh
 
 
 `` 三 核显直通 ``
 
 
 
+ 加载-bios ddsbios.bin 即可通过uefi模式直通启动
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  其他：
+  
 # 定时开关机
 crontab
 10 6 * * * qm start 机器ID #每天6点10分开机
