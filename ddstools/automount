@@ -1,0 +1,18 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides: [automountall]
+# Required-Start: $network $remote_fs $local_fs
+# Required-Stop: $network $remote_fs $local_fs
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: [开机挂载硬盘]
+# Description: [开机挂载硬盘]
+### END INIT INFO
+mount -t exfat -o iocharset=utf8,uid=1000,gid=1000 /dev/nvme0n1p1 /mnt/nvme500g
+mount -t exfat -o iocharset=utf8,uid=1000,gid=1000 /dev/nvme1n1p1 /mnt/nvme1t
+mount -t exfat -o iocharset=utf8,uid=1000,gid=1000 /dev/sda1 /mnt/hdd4t
+mount -t exfat -o iocharset=utf8,uid=1000,gid=1000 /dev/sdb1 /mnt/ssd500g
+### mount -t exfat -o iocharset=utf8,uid=1000,gid=1000 /dev/sdc1 /mnt/ssd128g
+
+exit 0

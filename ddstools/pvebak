@@ -1,0 +1,8 @@
+#!/bin/bash
+x='/mnt/hdd4t/pveConfBackup'
+bakpach=$x/`date '+%Y%m%d%H%M'`
+    if [ ! -d $bakpach ];then
+        mkdir $bakpach
+    fi
+    cp -rf /etc/pve/qemu-server/* $bakpach/
+
